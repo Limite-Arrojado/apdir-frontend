@@ -1,5 +1,5 @@
 import Menu from "@/app/menu";
-import Logo from "../../logo";
+import Logo from "./logo";
 import clsx from "clsx";
 import { ComponentProps } from "react";
 import Link from "next/link";
