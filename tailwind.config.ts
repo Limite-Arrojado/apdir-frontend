@@ -14,6 +14,8 @@ const config: Config = {
       },
       backgroundImage: {
         "banner-image": "url(../../public/home-banner.jpeg)",
+        "quote-marks": "url(../../public/quote-marks.png)",
+        world: "url(../../public/world.png)",
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
