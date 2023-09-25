@@ -15,7 +15,7 @@ const InsolCounter = (props: { insol: StaticImageData }) => {
   useEffect(() => {
     const interval = setInterval(() => {
       if (members < membersFinal) setMembers(members + 1);
-    }, 10);
+    }, 5);
 
     return () => clearInterval(interval);
   }, [members, membersFinal]);
