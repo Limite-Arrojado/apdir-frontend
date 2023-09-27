@@ -10,7 +10,7 @@ const FooterContacts = () => {
       className={clsx(
         "mt-[150px]",
         "flex justify-center items-center",
-        "bg-white bg-footer-pattern bg-center bg-[78%_auto] ",
+        "bg-white bg-footer-pattern bg-left-bottom bg-[78%_auto] ",
         "w-full"
       )}
     >
