@@ -6,7 +6,8 @@ const Button = (props: { text: string }) => {
     <button
       className={clsx(
         "w-full mt-5 py-4",
-        "bg-primary hover:bg-secondary text-white uppercase font-semibold"
+        "bg-primary hover:bg-secondary text-white uppercase font-semibold",
+        "ease duration-[.3s]"
       )}
     >
       {text}
