@@ -6,7 +6,7 @@ const Banner = () => {
     <Link href={"/evento"}>
       <div
         className={clsx(
-          "w-full h-[200px] md:h-[350px]",
+          "w-full h-[100px] md:h-[350px]",
           "bg-banner-image bg-contain bg-right-top bg-no-repeat bg-[#FCBA80]"
         )}
       ></div>

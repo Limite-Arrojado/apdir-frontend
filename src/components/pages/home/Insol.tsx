@@ -8,7 +8,7 @@ const Insol = async () => {
   const { default: insol } = await import("assets/insol.png");
 
   return (
-    <div className={clsx("flex flex-wrap-reverse", "w-full")}>
+    <div className={clsx("flex flex-wrap", "w-full")}>
       <div
         className={clsx(
           "md:w-[65%] w-full",
@@ -37,7 +37,7 @@ const Insol = async () => {
       </div>
       <div
         className={clsx(
-          "md:w-[15%] w-full h-80 md:h-[full]",
+          "md:w-[15%] w-full h-[100px] md:h-[full]",
           "bg-world bg-cover bg-center bg-no-repeat",
           "relative"
         )}
