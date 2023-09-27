@@ -1,3 +1,4 @@
+import FooterContacts from "@/components/FooterContacts";
 import Banner from "@/components/pages/home/Banner";
 import Events from "@/components/pages/home/Events";
 import Insol from "@/components/pages/home/Insol";
@@ -10,6 +11,7 @@ export default function Home() {
       <Insol />
       <News />
       <Events />
+      <FooterContacts />
     </>
   );
 }

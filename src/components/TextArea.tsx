@@ -1,0 +1,24 @@
+import clsx from "clsx";
+import { INormalInput } from "./NormalInput";
+
+const TextArea = (props: INormalInput) => {
+  const { placeholder, defaultValue, fullWith } = props;
+
+  return (
+    <textarea
+      className={clsx(
+        "bg-white appearance-none outline-0	",
+        "text-[14px] text-[#7a7a7a]",
+        {
+          "w-full": fullWith,
+        },
+        "py-4 px-[1rem] mb-3",
+        "focus:border-[1px] focus:border-solid"
+      )}
+      placeholder={placeholder}
+      value={defaultValue}
+    />
+  );
+};
+
+export default TextArea;
