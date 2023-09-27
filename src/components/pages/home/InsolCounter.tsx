@@ -38,7 +38,8 @@ const InsolCounter = (props: { insol: StaticImageData }) => {
       className={clsx(
         "md:w-[20%] w-full",
         "bg-[#1C2544]",
-        "flex flex-col justify-center"
+        "flex flex-col justify-center",
+        "py-7"
       )}
     >
       <div className={clsx("flex justify-center")}>

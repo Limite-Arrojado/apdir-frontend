@@ -37,7 +37,7 @@ const Insol = async () => {
       </div>
       <div
         className={clsx(
-          "md:w-[15%] w-full h-[100px] md:h-[full]",
+          "md:w-[15%] w-full h-[150px] md:h-auto",
           "bg-world bg-cover bg-center bg-no-repeat",
           "relative"
         )}
