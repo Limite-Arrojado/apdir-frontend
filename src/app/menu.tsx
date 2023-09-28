@@ -31,7 +31,7 @@ const Menu = ({
         </button>
 
         {isOpen && (
-          <div className="absolute bg-white bottom-[-128px] left-0 ml-[-10px] shadow-[0px_12px_13px_0px_#0000005e]">
+          <div className="absolute bg-white bottom-[-128px] z-50 left-0 ml-[-10px] shadow-[0px_12px_13px_0px_#0000005e]">
             <ul className="w-[50vw]">
               {menuOptions.map((option) => (
                 <li
