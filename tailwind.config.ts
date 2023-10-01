@@ -21,7 +21,6 @@ const config: Config = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
         "mesh-background": "url(../../public/mesh-background.png)",
         "footer-pattern": "url(../../public/footer-pattern.jpeg)",
-        "banner-image": "url(../../public/home-banner.jpeg)",
       },
       screens: {
         lg: "1040px",
