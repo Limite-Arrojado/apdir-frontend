@@ -13,9 +13,14 @@ const config: Config = {
         secondary: "#2E2F4F",
       },
       backgroundImage: {
+        "banner-image": "url(../../public/home-banner.jpeg)",
+        "quote-marks": "url(../../public/quote-marks.png)",
+        world: "url(../../public/world.png)",
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+        "mesh-background": "url(../../public/mesh-background.png)",
+        "footer-pattern": "url(../../public/footer-pattern.jpeg)",
         "banner-image": "url(../../public/home-banner.jpeg)",
       },
       screens: {
