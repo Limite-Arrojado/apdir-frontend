@@ -2,22 +2,17 @@ import clsx from "clsx";
 import EventComponent from "./EventComponent";
 
 export interface IEvent {
-  img: string;
-  title: string;
-  date: string;
+  id: string;
+  imageDeCapa: {
+    url: string;
+  };
+  titulo: string;
+  data: string;
   local: string;
-  target: string;
 }
 
-const Events = () => {
-  const events: IEvent[] = Array(6).fill({
-    img: "https://apdir-assoc.pt/wp-content/uploads/2021/02/IV-congresso-nacional-de-insolvencia-e-recuperacao.jpg",
-    title: "IV Congresso nacional de Insolvência e recuperação",
-    date: "26 Março 2021",
-    local: "Online",
-    target:
-      "https://apdir-assoc.pt/eventos/iv-congresso-nacional-de-insolvencia-e-recuperacao/",
-  });
+const Events = (props: { title: string; events: IEvent[] }) => {
+  const { title, events } = props;
 
   return (
     <div
@@ -36,7 +31,7 @@ const Events = () => {
       >
         <div className={clsx("text-center")}>
           <h2 className={clsx("text-5xl font-semibold text-center")}>
-            Últimos Eventos
+            {title}
           </h2>
         </div>
         {/* Last Events */}
@@ -47,9 +42,10 @@ const Events = () => {
             "mt-6"
           )}
         >
-          {events.map((event: IEvent) => {
-            return <EventComponent data={event} key={event.target} />;
-          })}
+          {events &&
+            events.map((event: IEvent) => {
+              return <EventComponent data={event} key={event.id} />;
+            })}
         </div>
       </div>
 

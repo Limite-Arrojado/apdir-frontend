@@ -2,6 +2,7 @@ import clsx from "clsx";
 import Image from "next/image";
 import { IEvent } from "./Events";
 import Link from "next/link";
+import converterData from "@/utils/dateConversion";
 
 const EventComponent = (props: { data: IEvent }) => {
   const { data: event } = props;
@@ -15,18 +16,24 @@ const EventComponent = (props: { data: IEvent }) => {
         "bg-[#F4F4F9]"
       )}
     >
-      <Link href={event.target}>
+      <Link href={"eventos/" + event.id}>
         <div className={clsx("h-[185px]", "relative")}>
-          <Image alt={event.title} src={event.img} fill />
+          <Image
+            alt={event.titulo}
+            src={event.imageDeCapa.url}
+            fill
+            objectFit="cover"
+            objectPosition="left top"
+          />
         </div>
       </Link>
       <div className={clsx("flex flex-col justify-between", "p-[30px]")}>
         <div className={clsx("text-[20px] text-[#2e2f4f] font-semibold")}>
-          <Link href={event.target}>{event.title}</Link>
+          <Link href={event.id}>{event.titulo}</Link>
         </div>
 
         <div className={clsx("mt-3", "text-[14px]")}>
-          {event.date} | {event.local}
+          {converterData(event.data)} | {event.local}
         </div>
       </div>
     </div>

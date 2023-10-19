@@ -5,20 +5,16 @@ import { useState } from "react";
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
 
 export interface INew {
-  img: string;
-  title: string;
-  target: string;
-  date: string;
+  logo: {
+    url: string;
+  };
+  titulo: string;
+  link: string;
+  dataDePublicacao: string;
 }
 
-const News = () => {
-  const news: INew[] = Array(10).fill({
-    img: "https://apdir-assoc.pt/wp-content/uploads/2020/04/explicador-observador.jpg",
-    title: 'Associação Têxtil. "Dielmar não representa setor"',
-    target:
-      "https://observador.pt/programas/explicador/associacao-textil-dielmar-nao-representa-sector/",
-    date: "04/07/2021",
-  });
+const News = (props: { title: string; news: INew[] }) => {
+  const { title, news } = props;
 
   const [showAll, setShowAll] = useState(false);
 
@@ -39,7 +35,7 @@ const News = () => {
       >
         <div className={clsx("text-center")}>
           <h2 className={clsx("text-5xl font-semibold text-center")}>
-            Notícias
+            {title}
           </h2>
         </div>
         {/* NEWS */}
@@ -51,7 +47,7 @@ const News = () => {
           )}
         >
           {news.slice(0, showAll ? news.length : 4).map((item) => {
-            return <New data={item} key={item.target} />;
+            return <New data={item} key={item.link} />;
           })}
         </div>
 
