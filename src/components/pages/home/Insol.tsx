@@ -1,9 +1,12 @@
 import clsx from "clsx";
 import InsolCounter from "./InsolCounter";
 
-const Insol = async () => {
-  const text =
-    "A APDIR é uma associação membro da INSOL International. Todos os associados ficam automaticamente membros desta organização.";
+const Insol = async (props: {
+  text: string;
+  qtyMembers: number;
+  qtyAssociation: number;
+}) => {
+  const { text, qtyMembers, qtyAssociation } = props;
 
   const { default: insol } = await import("assets/insol.png");
 
@@ -50,7 +53,11 @@ const Insol = async () => {
           )}
         ></div>
       </div>
-      <InsolCounter insol={insol} />
+      <InsolCounter
+        insol={insol}
+        qtyMembers={qtyMembers}
+        qtyAssociations={qtyAssociation}
+      />
     </div>
   );
 };

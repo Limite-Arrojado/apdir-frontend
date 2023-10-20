@@ -3,11 +3,17 @@ import clsx from "clsx";
 import Image, { StaticImageData } from "next/image";
 import { useEffect, useState } from "react";
 
-const InsolCounter = (props: { insol: StaticImageData }) => {
+const InsolCounter = (props: {
+  insol: StaticImageData;
+  qtyMembers: number;
+  qtyAssociations: number;
+}) => {
+  const { qtyMembers, qtyAssociations } = props;
+
   const membersInitial = 10000;
   const associationsInitial = 10;
-  const membersFinal = membersInitial + 500;
-  const associationsFinal = associationsInitial + 30;
+  const membersFinal = qtyMembers;
+  const associationsFinal = qtyAssociations;
 
   const [members, setMembers] = useState(membersInitial);
   const [associations, setAssociations] = useState(associationsInitial);

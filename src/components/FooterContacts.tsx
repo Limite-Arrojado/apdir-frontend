@@ -4,7 +4,27 @@ import TextArea from "./TextArea";
 import CheckBox from "./CheckBox";
 import Button from "./Button";
 
-const FooterContacts = () => {
+export interface IContacts {
+  tituloDoFormulario: string;
+  textoRgpd: string;
+  tituloContactos: string;
+  tituloMorada: string;
+  morada: string;
+  tituloTelefone: string;
+  telefone: string;
+}
+
+const FooterContacts = (props: { data: IContacts[] }) => {
+  const {
+    tituloDoFormulario,
+    textoRgpd,
+    tituloContactos,
+    tituloMorada,
+    morada,
+    tituloTelefone,
+    telefone,
+  } = props.data[0];
+
   return (
     <div
       className={clsx(
@@ -25,42 +45,35 @@ const FooterContacts = () => {
           )}
         >
           <h2 className={clsx("text-[#110728] text-[39px] font-semibold mb-5")}>
-            Deixe-nos uma mensagem
+            {tituloDoFormulario}
           </h2>
           <NormalInput placeholder="Nome Completo..." fullWith />
           <NormalInput placeholder="Email..." fullWith />
           <TextArea placeholder="Escreva a sua mensagem" fullWith />
-          <div>
-            <CheckBox />
-            <span>
-              Autorizo a recolha e tratamento dos dados pessoais supra, com
-              vista a assegurar o normal funcionamento da APDIR na sua relação
-              com os Associados, designadamente para efeitos de divulgação de
-              iniciativas no respectivo âmbito de actividade;
-            </span>
-            <p className={"mt-4"}>
-              * A APDIR assegura ao signatário o direito de, a todo o tempo,
-              requerer a actualização dos dados ora facultados e bem assim a sua
-              remoção.
-            </p>
+          <div className="flex items-start">
+            <div>
+              <CheckBox />
+            </div>
+
+            <div className="whitespace-pre-line">{textoRgpd}</div>
           </div>
           <Button text={"Enviar"} />
         </div>
         <div className={clsx("md:w-1/2", "pt-10 pl-12", "flex flex-col")}>
           <h2 className={clsx("text-[26px] font-semibold mb-[20px]")}>
-            Contactos
+            {tituloContactos}
           </h2>
           <div className={clsx("mb-[20px]")}>
             <h2 className={clsx("uppercase text-[14px] font-semibold")}>
-              Morada
+              {tituloMorada}
             </h2>
-            <div>Avenida da República, nº 50, 2º andar, 1050-196 Lisboa</div>
+            <div>{morada}</div>
           </div>
           <div className={clsx("mb-[20px]")}>
             <h2 className={clsx("uppercase text-[14px] font-semibold")}>
-              Telefone
+              {tituloTelefone}
             </h2>
-            <div>+351 211 388 141</div>
+            <div>{telefone}</div>
           </div>
         </div>
       </div>

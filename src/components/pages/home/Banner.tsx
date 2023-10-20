@@ -1,16 +1,14 @@
+import PageBanner from "@/components/PageBanner";
 import clsx from "clsx";
 import Link from "next/link";
 
-const Banner = () => {
+const Banner = (props: { img: { url: string }; target: string }) => {
+  const { img, target } = props;
+
   return (
-    <Link href={"/evento"}>
-      <div
-        className={clsx(
-          "w-full h-[100px] md:h-[350px]",
-          "bg-banner-image bg-contain bg-right-top bg-no-repeat bg-[#FCBA80]"
-        )}
-      ></div>
-    </Link>
+    <>
+      <PageBanner image={img.url} target={target} home />
+    </>
   );
 };
 

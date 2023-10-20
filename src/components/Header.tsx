@@ -8,15 +8,15 @@ const Header = () => {
   const menuOptions: ComponentProps<typeof Menu>["menuOptions"] = [
     {
       children: "Sobre Nós",
-      href: "sobre-nos",
+      href: "/sobre-nos",
     },
     {
       children: "Inscrição",
-      href: "inscricoes",
+      href: "/inscricoes",
     },
     {
       children: "Contactos",
-      href: "contactos",
+      href: "/contactos",
     },
   ];
 
@@ -34,7 +34,7 @@ const Header = () => {
       {/* Button */}
       <div>
         <Link
-          href="/area-privada"
+          href="/brevemente"
           className={clsx(
             "bg-primary hover:bg-secondary",
             "ease duration-[.3s]",
