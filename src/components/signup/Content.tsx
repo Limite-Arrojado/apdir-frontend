@@ -19,6 +19,11 @@ interface ISignup {
   buttonLabel: string;
 }
 
+interface IFormSubmitedField {
+  name: string;
+  value: string;
+}
+
 const Content = (props: ISignup) => {
   const {
     description,
@@ -35,6 +40,15 @@ const Content = (props: ISignup) => {
     buttonLabel,
   } = props;
 
+  const submitForm = async (formData: FormData) => {
+    "use server";
+    let html: string = "";
+    formData.forEach((field, key) => {
+      if (key.toString().startsWith("$")) return;
+      html += `<p>${key}: ${field}</p>`;
+    });
+  };
+
   return (
     <div className={clsx("w-full", "flex justify-center", "md:pb-[100px]")}>
       <div
@@ -46,22 +60,22 @@ const Content = (props: ISignup) => {
         <div className={clsx("whitespace-pre-line", "text-[14px]")}>
           {description}
         </div>
-        <form className={clsx("mt-6")}>
-          <NormalInput label={firstName} fullWith />
-          <NormalInput label={lastName} fullWith />
-          <NormalInput type="date" label={birthDate} fullWith />
-          <NormalInput label={job} fullWith />
-          <NormalInput label={nIdentificacao} fullWith />
-          <NormalInput label={nContribuinte} fullWith />
-          <NormalInput label={phone} fullWith />
-          <NormalInput label={email} fullWith />
-          <TextArea label={address} fullWith />
+        <form className={clsx("mt-6")} action={submitForm}>
+          <NormalInput name="firstName" label={firstName} fullWith />
+          <NormalInput name="lastName" label={lastName} fullWith />
+          <NormalInput name="date" type="date" label={birthDate} fullWith />
+          <NormalInput name="job" label={job} fullWith />
+          <NormalInput name="nIdentificacao" label={nIdentificacao} fullWith />
+          <NormalInput name="nContribuinte" label={nContribuinte} fullWith />
+          <NormalInput name="phone" label={phone} fullWith />
+          <NormalInput name="email" label={email} fullWith />
+          <TextArea name="address" label={address} fullWith />
           <div className={"mb-8 flex items-start"}>
-            <div>{<CheckBox />}</div>
+            <div>{<CheckBox name="rgpd" />}</div>
 
             <div className="whitespace-pre-line">{rgpdText}</div>
           </div>
-          <Button text={buttonLabel} />
+          <Button text={buttonLabel} type="submit" />
         </form>
       </div>
     </div>

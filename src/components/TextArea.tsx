@@ -8,6 +8,7 @@ const TextArea = (props: INormalInput) => {
     <>
       <label>{label}</label>
       <textarea
+        name={name}
         className={clsx(
           "bg-white appearance-none outline-0	",
           "text-[14px] text-[#7a7a7a]",
