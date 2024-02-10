@@ -14,6 +14,8 @@ export interface IEvent {
 const Events = (props: { title: string; events: IEvent[] }) => {
   const { title, events } = props;
 
+  const isOddLength = events && events.length % 2 !== 0;
+
   return (
     <div
       className={clsx(

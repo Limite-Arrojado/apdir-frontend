@@ -12,7 +12,7 @@ const EventComponent = (props: { data: IEvent }) => {
       className={clsx(
         "flex flex-col",
         "md:w-[calc(40%)] md:min-w-[523px]",
-        "mx-auto mt-3 md:my-[13px]",
+        "mt-3 md:my-[13px]",
         "bg-[#F4F4F9]"
       )}
     >
@@ -29,7 +29,7 @@ const EventComponent = (props: { data: IEvent }) => {
       </Link>
       <div className={clsx("flex flex-col justify-between", "p-[30px]")}>
         <div className={clsx("text-[20px] text-[#2e2f4f] font-semibold")}>
-          <Link href={event.id}>{event.titulo}</Link>
+          <Link href={"eventos/" + event.id}>{event.titulo}</Link>
         </div>
 
         <div className={clsx("mt-3", "text-[14px]")}>
