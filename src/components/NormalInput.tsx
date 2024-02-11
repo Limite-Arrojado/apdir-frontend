@@ -7,15 +7,28 @@ export interface INormalInput {
   name?: string;
   label?: string;
   type?: string;
+  required?: boolean;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const NormalInput = (props: INormalInput) => {
-  const { placeholder, defaultValue, fullWith, label, name, type } = props;
+  const {
+    placeholder,
+    defaultValue,
+    fullWith,
+    label,
+    name,
+    type,
+    onChange,
+    required,
+  } = props;
 
   return (
     <>
       {!!label && <label htmlFor={name}>{label}</label>}
       <input
+        required={!!required}
+        onChange={onChange}
         type={type}
         name={name}
         className={clsx(

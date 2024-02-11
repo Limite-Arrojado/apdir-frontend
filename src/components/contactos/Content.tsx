@@ -1,8 +1,11 @@
+"use client";
 import clsx from "clsx";
 import NormalInput from "../NormalInput";
 import TextArea from "../TextArea";
 import Button from "../Button";
 import CheckBox from "../CheckBox";
+import { useState } from "react";
+import sendEmail from "@/utils/sendEmail";
 
 interface IContacts {
   tituloDoFormulario: string;
@@ -25,6 +28,44 @@ const Content = (props: IContacts) => {
     telefone,
   } = props;
 
+  const [formData, setFormData] = useState({
+    fullName: "",
+    email: "",
+    message: "",
+    rgpdChecked: false,
+  });
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.stopPropagation();
+    e.preventDefault();
+
+    const html = `
+      <div>
+        <h2>Novo contacto</h2>
+        <p>Nome: ${formData.fullName}</p>
+        <p>Email: ${formData.email}</p>
+        <p>Mensagem: ${formData.message}</p>
+      </div>
+    `;
+
+    await sendEmail({
+      subject: "Novo formulário de contacto",
+      html: html,
+    });
+  };
+
+  const handleChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLInputElement
+    >
+  ) => {
+    const { name, value, type, checked } = e.target as HTMLInputElement;
+
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: type === "checkbox" ? checked : value,
+    }));
+  };
   return (
     <>
       <div
@@ -59,16 +100,46 @@ const Content = (props: IContacts) => {
             >
               {tituloDoFormulario}
             </h2>
-            {<NormalInput placeholder="Nome Completo..." fullWith />}
-            {<NormalInput placeholder="Email..." fullWith />}
-            {<TextArea placeholder="Escreva a sua mensagem" fullWith />}
-            <div className="flex items-start">
-              <div>
-                <CheckBox />
+            <form onSubmit={handleSubmit}>
+              {
+                <NormalInput
+                  required
+                  name="fullName"
+                  onChange={handleChange}
+                  placeholder="Nome Completo..."
+                  fullWith
+                />
+              }
+              {
+                <NormalInput
+                  required
+                  name="email"
+                  onChange={handleChange}
+                  placeholder="Email..."
+                  fullWith
+                />
+              }
+              {
+                <TextArea
+                  required
+                  name="message"
+                  onChange={handleChange}
+                  placeholder="Escreva a sua mensagem"
+                  fullWith
+                />
+              }
+              <div className="flex items-start">
+                <div>
+                  <CheckBox
+                    required
+                    onChange={handleChange}
+                    name="rgpdChecked"
+                  />
+                </div>
+                <div className="whitespace-pre-line">{textoRgpd}</div>
               </div>
-              <div className="whitespace-pre-line">{textoRgpd}</div>
-            </div>
-            {<Button text={"Enviar"} />}
+              {<Button type="submit" text={"Enviar"} />}
+            </form>
           </div>
           <div className={clsx("md:w-1/2", "pt-20 pl-12", "flex flex-col")}>
             <h2 className={clsx("text-[26px] font-semibold mb-[20px]")}>

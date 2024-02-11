@@ -2,12 +2,22 @@ import clsx from "clsx";
 import { INormalInput } from "./NormalInput";
 
 const TextArea = (props: INormalInput) => {
-  const { placeholder, defaultValue, fullWith, label, name } = props;
+  const {
+    placeholder,
+    defaultValue,
+    fullWith,
+    label,
+    name,
+    onChange,
+    required,
+  } = props;
 
   return (
     <>
       <label>{label}</label>
       <textarea
+        required={!!required}
+        onChange={onChange as any}
         name={name}
         className={clsx(
           "bg-white appearance-none outline-0	",

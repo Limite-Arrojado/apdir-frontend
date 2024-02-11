@@ -3,6 +3,7 @@ import NormalInput from "../NormalInput";
 import TextArea from "../TextArea";
 import CheckBox from "../CheckBox";
 import Button from "../Button";
+import sendEmail from "@/utils/sendEmail";
 
 interface ISignup {
   description: string;
@@ -47,6 +48,11 @@ const Content = (props: ISignup) => {
       if (key.toString().startsWith("$")) return;
       html += `<p>${key}: ${field}</p>`;
     });
+
+    await sendEmail({
+      subject: "Novo formulário de inscrição",
+      html: html,
+    });
   };
 
   return (
@@ -61,17 +67,33 @@ const Content = (props: ISignup) => {
           {description}
         </div>
         <form className={clsx("mt-6")} action={submitForm}>
-          <NormalInput name="firstName" label={firstName} fullWith />
-          <NormalInput name="lastName" label={lastName} fullWith />
-          <NormalInput name="date" type="date" label={birthDate} fullWith />
-          <NormalInput name="job" label={job} fullWith />
-          <NormalInput name="nIdentificacao" label={nIdentificacao} fullWith />
-          <NormalInput name="nContribuinte" label={nContribuinte} fullWith />
-          <NormalInput name="phone" label={phone} fullWith />
-          <NormalInput name="email" label={email} fullWith />
-          <TextArea name="address" label={address} fullWith />
+          <NormalInput name="firstName" required label={firstName} fullWith />
+          <NormalInput name="lastName" required label={lastName} fullWith />
+          <NormalInput
+            name="date"
+            type="date"
+            required
+            label={birthDate}
+            fullWith
+          />
+          <NormalInput name="job" required label={job} fullWith />
+          <NormalInput
+            name="nIdentificacao"
+            required
+            label={nIdentificacao}
+            fullWith
+          />
+          <NormalInput
+            name="nContribuinte"
+            required
+            label={nContribuinte}
+            fullWith
+          />
+          <NormalInput name="phone" required label={phone} fullWith />
+          <NormalInput name="email" required label={email} fullWith />
+          <TextArea name="address" required label={address} fullWith />
           <div className={"mb-8 flex items-start"}>
-            <div>{<CheckBox name="rgpd" />}</div>
+            <div>{<CheckBox name="rgpd" required />}</div>
 
             <div className="whitespace-pre-line">{rgpdText}</div>
           </div>
