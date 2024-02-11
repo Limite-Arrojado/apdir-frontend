@@ -5,7 +5,9 @@ import Link from "next/link";
 import Gallery from "./Gallery";
 import converterData from "@/utils/dateConversion";
 import ImageViewer from "./ImageViewer";
-import { MouseEventHandler, useState } from "react";
+import parse from "html-react-parser";
+import { MouseEventHandler, ReactNode, useState } from "react";
+import { renderToString } from "react-dom/server";
 
 interface IEvent {
   title: string;
@@ -17,27 +19,36 @@ interface IEvent {
   }[];
 }
 
+const parseLinks = (string: string) => {
+  const linkRegex =
+    /(<a [^>]*href=['"]([^'"]+)['"][^>]*>.*?<\/a>)|((https?:\/\/[^\s<]+))/g;
+
+  const parsedString = string.replace(linkRegex, (match, p1, p2, p3) => {
+    if (p1) {
+      return p1;
+    }
+
+    const isInIframe = /<iframe[^>]+src=['"]([^'"]+)['"][^>]*>/.test(string);
+
+    if (isInIframe) {
+      return match;
+    }
+
+    return `<a href="${p3}" target="_blank">${p3}</a>`;
+  });
+
+  return parsedString;
+};
+
 const Content = (props: IEvent) => {
   const { title, local, data, description, gallery } = props;
 
   const galleryItems = gallery.map((i) => i.url);
 
-  const parts = description.split(" ");
-  const finalText = parts.map((part: string, index: number) => {
-    if (part.startsWith("http")) {
-      return (
-        <Link
-          className={clsx("text-[18px] text-[#cd2653]", "mb-3")}
-          key={index}
-          href={part}
-        >
-          {part}
-        </Link>
-      );
-    } else {
-      return part + " ";
-    }
-  });
+  const finalText = parseLinks(description);
+  console.log(finalText);
+
+  //const stringRepresentation = finalText.join("");
 
   const [isOpen, setIsOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(0);
@@ -77,8 +88,10 @@ const Content = (props: IEvent) => {
                 {converterData(data)}
               </h2>
               <p className={clsx("text-[18px]", "mb-3")}>{title}</p>
-              <p className={clsx("text-[18px]", "mb-3")}>26/03/2021 às 10H</p>
-              {finalText}
+              <div className={clsx("whitespace-pre-line")}>
+                {parse(finalText)}
+              </div>
+
               {/*<Link
               className={clsx("text-[18px] text-[#cd2653]", "mb-3")}
               href="https://eco.sapo.pt/topico/iv-congresso-nacional-da-insolvencia-e-recuperacao/"
