@@ -12,7 +12,13 @@ const New = (props: { data: INew }) => {
     <div className={clsx("flex justify-start", "p-5 md:w-1/2")}>
       <div className={clsx("flex justify-center items-center")}>
         <Link href={data.link} target="_blank">
-          <Image width={80} height={80} alt={data.titulo} src={data.logo.url} />
+          <Image
+            width={80}
+            height={80}
+            className={clsx("w-[80px] height-[80px] max-w-[80px]")}
+            alt={data.titulo}
+            src={data.logo.url}
+          />
         </Link>
       </div>
 
