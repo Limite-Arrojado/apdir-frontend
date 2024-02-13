@@ -11,13 +11,13 @@ const New = (props: { data: INew }) => {
   return (
     <div className={clsx("flex justify-start", "p-5 md:w-1/2")}>
       <div className={clsx("flex justify-center items-center")}>
-        <Link href={data.link}>
+        <Link href={data.link} target="_blank">
           <Image width={80} height={80} alt={data.titulo} src={data.logo.url} />
         </Link>
       </div>
 
       <div className={clsx("pl-6")}>
-        <Link href={data.link}>
+        <Link href={data.link} target="_blank">
           <div className={clsx("text-[18px] font-semibold")}>{data.titulo}</div>
         </Link>
 
