@@ -23,7 +23,9 @@ const Content = (props: IAbout) => {
     >
       <div className={clsx("w-full px-10")}>
         <Person photo={photo} name={name} cargo={cargo} />
-        <div className={clsx("mt-10 whitespace-pre-line text-[16px]")}>
+        <div
+          className={clsx("mt-10 whitespace-pre-line text-[16px] text-justify")}
+        >
           {text}
         </div>
       </div>

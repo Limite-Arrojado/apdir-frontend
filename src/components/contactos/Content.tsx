@@ -136,7 +136,9 @@ const Content = (props: IContacts) => {
                     name="rgpdChecked"
                   />
                 </div>
-                <div className="whitespace-pre-line">{textoRgpd}</div>
+                <div className="whitespace-pre-line text-justify">
+                  {textoRgpd}
+                </div>
               </div>
               {<Button type="submit" text={"Enviar"} />}
             </form>

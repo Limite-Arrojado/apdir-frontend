@@ -88,7 +88,7 @@ const Content = (props: IEvent) => {
                 {converterData(data)}
               </h2>
               <p className={clsx("text-[18px]", "mb-3")}>{title}</p>
-              <div className={clsx("whitespace-pre-line")}>
+              <div className={clsx("whitespace-pre-line text-justify")}>
                 {parse(finalText)}
               </div>
 

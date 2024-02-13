@@ -117,7 +117,9 @@ const FooterContacts = (props: { data: IContacts[] }) => {
                 <CheckBox name="rgpd" required onChange={handleChange} />
               </div>
 
-              <div className="whitespace-pre-line">{textoRgpd}</div>
+              <div className="whitespace-pre-line text-justify">
+                {textoRgpd}
+              </div>
             </div>
             <Button type="submit" text={"Enviar"} />
           </form>
