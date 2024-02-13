@@ -28,6 +28,10 @@ const Content = (props: IContacts) => {
     telefone,
   } = props;
 
+  const [emailSentStatus, setEmailSentStatus] = useState<
+    "success" | "error" | undefined
+  >();
+
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -51,7 +55,9 @@ const Content = (props: IContacts) => {
     await sendEmail({
       subject: "Novo formulário de contacto",
       html: html,
-    });
+    })
+      .then(() => setEmailSentStatus("success"))
+      .catch(() => setEmailSentStatus("error"));
   };
 
   const handleChange = (
@@ -141,6 +147,24 @@ const Content = (props: IContacts) => {
                 </div>
               </div>
               {<Button type="submit" text={"Enviar"} />}
+              {emailSentStatus === "success" && (
+                <div
+                  className={clsx(
+                    "w-full text-center mt-3 text-[#70C0BB] font-semibold"
+                  )}
+                >
+                  Email enviado com sucesso
+                </div>
+              )}
+              {emailSentStatus === "error" && (
+                <div
+                  className={clsx(
+                    "w-full text-center mt-3 text-[#cd2653] font-semibold"
+                  )}
+                >
+                  Erro ao enviar o email, tente mais tarde
+                </div>
+              )}
             </form>
           </div>
           <div className={clsx("md:w-1/2", "pt-20 pl-12", "flex flex-col")}>
