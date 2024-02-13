@@ -14,10 +14,6 @@ export interface IEvent {
 const Events = (props: { title: string; events: IEvent[] }) => {
   const { title, events } = props;
 
-  const orderedEvents = events.sort((a, b) => {
-    return new Date(a.data).getTime() + new Date(b.data).getTime();
-  });
-
   return (
     <div
       className={clsx(
@@ -46,8 +42,8 @@ const Events = (props: { title: string; events: IEvent[] }) => {
             "mt-6"
           )}
         >
-          {orderedEvents &&
-            orderedEvents.map((event: IEvent) => {
+          {events &&
+            events.map((event: IEvent) => {
               return <EventComponent data={event} key={event.id} />;
             })}
         </div>
