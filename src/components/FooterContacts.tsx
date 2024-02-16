@@ -34,6 +34,9 @@ const FooterContacts = (props: { data: IContacts[] }) => {
     message: "",
     rgpdChecked: false,
   });
+  const [emailSentStatus, setEmailSentStatus] = useState<
+    "success" | "error" | undefined
+  >();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.stopPropagation();
@@ -51,7 +54,9 @@ const FooterContacts = (props: { data: IContacts[] }) => {
     await sendEmail({
       subject: "Novo formulário de contacto",
       html: html,
-    });
+    })
+      .then(() => setEmailSentStatus("success"))
+      .catch(() => setEmailSentStatus("error"));
   };
 
   const handleChange = (
@@ -117,9 +122,29 @@ const FooterContacts = (props: { data: IContacts[] }) => {
                 <CheckBox name="rgpd" required onChange={handleChange} />
               </div>
 
-              <div className="whitespace-pre-line">{textoRgpd}</div>
+              <div className="whitespace-pre-line text-justify">
+                {textoRgpd}
+              </div>
             </div>
             <Button type="submit" text={"Enviar"} />
+            {emailSentStatus === "success" && (
+              <div
+                className={clsx(
+                  "w-full text-center mt-3 text-[#70C0BB] font-semibold"
+                )}
+              >
+                Email enviado com sucesso
+              </div>
+            )}
+            {emailSentStatus === "error" && (
+              <div
+                className={clsx(
+                  "w-full text-center mt-3 text-[#ff3333] font-semibold"
+                )}
+              >
+                Erro ao enviar o email, tente mais tarde
+              </div>
+            )}
           </form>
         </div>
         <div className={clsx("md:w-1/2", "pt-10 pl-12", "flex flex-col")}>

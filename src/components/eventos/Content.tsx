@@ -46,7 +46,6 @@ const Content = (props: IEvent) => {
   const galleryItems = gallery.map((i) => i.url);
 
   const finalText = parseLinks(description);
-  console.log(finalText);
 
   //const stringRepresentation = finalText.join("");
 
@@ -70,57 +69,56 @@ const Content = (props: IEvent) => {
       )}
       <div className={clsx("py-20", "flex justify-center items-center")}>
         <div
-          className={clsx(
-            "max-w-[1140px] w-full mx-[auto]",
-            "flex flex-wrap-reverse"
-          )}
+          className={clsx("max-w-[1140px] w-full mx-[auto]", "flex flex-col")}
         >
-          <div className={clsx("max-w-[750px]", "p-[30px]")}>
+          <h2
+            className={clsx(
+              "text-[#4CAEA0] uppercase text-[48px] font-semibold"
+            )}
+          >
+            {title}
+          </h2>
+          <div className={clsx("mt-5")}>
             <div>
-              <h2
-                className={clsx(
-                  "text-[#4CAEA0] uppercase text-[48px] font-semibold"
-                )}
-              >
-                {local}
-              </h2>
-              <h2 className={clsx("uppercase text-[48px]")}>
-                {converterData(data)}
-              </h2>
-              <p className={clsx("text-[18px]", "mb-3")}>{title}</p>
-              <div className={clsx("whitespace-pre-line")}>
-                {parse(finalText)}
-              </div>
+              <div className={clsx("flex justify-between")}>
+                <div>
+                  <h3 className={clsx("uppercase text-[36px]")}>{local}</h3>
+                  <h3 className={clsx("uppercase text-[36px]")}>
+                    {converterData(data)}
+                  </h3>
+                  <p className={clsx("text-[18px]", "mb-3")}>{title}</p>
+                  <div className={clsx("whitespace-pre-line text-justify")}>
+                    {parse(finalText)}
+                  </div>
+                </div>
 
-              {/*<Link
-              className={clsx("text-[18px] text-[#cd2653]", "mb-3")}
-              href="https://eco.sapo.pt/topico/iv-congresso-nacional-da-insolvencia-e-recuperacao/"
-            >
-              https://eco.sapo.pt/topico/iv-congresso-nacional-da-insolvencia-e-recuperacao/
-              </Link>*/}
-            </div>
-            {galleryItems.length > 1 && (
-              <div className={clsx("mt-16 w-full")}>
-                <h3 className={clsx("uppercase")}>Galeria</h3>
-                <div className={clsx("w-full mt-3")}>
-                  <Gallery
-                    items={galleryItems}
-                    handleImageClick={handleImageClick}
-                  />
+                <div
+                  className="cursor-pointer"
+                  onClick={() => handleImageClick(0)}
+                >
+                  {galleryItems.length > 0 && (
+                    <Image
+                      alt={title}
+                      className={clsx("p-[30px]")}
+                      width={350}
+                      height={100}
+                      src={galleryItems[0]}
+                    />
+                  )}
                 </div>
               </div>
-            )}
-          </div>
-          <div className="cursor-pointer" onClick={() => handleImageClick(0)}>
-            {galleryItems.length > 0 && (
-              <Image
-                alt={title}
-                className={clsx("p-[30px]")}
-                width={350}
-                height={100}
-                src={galleryItems[0]}
-              />
-            )}
+              {galleryItems.length > 1 && (
+                <div className={clsx("mt-16 w-full")}>
+                  <h3 className={clsx("uppercase")}>Galeria</h3>
+                  <div className={clsx("w-full mt-3")}>
+                    <Gallery
+                      items={galleryItems}
+                      handleImageClick={handleImageClick}
+                    />
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>

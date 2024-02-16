@@ -1,9 +1,11 @@
+"use client";
 import clsx from "clsx";
 import NormalInput from "../NormalInput";
 import TextArea from "../TextArea";
 import CheckBox from "../CheckBox";
 import Button from "../Button";
 import sendEmail from "@/utils/sendEmail";
+import { useState } from "react";
 
 interface ISignup {
   description: string;
@@ -41,8 +43,11 @@ const Content = (props: ISignup) => {
     buttonLabel,
   } = props;
 
+  const [emailSentStatus, setEmailSentStatus] = useState<
+    "success" | "error" | undefined
+  >();
+
   const submitForm = async (formData: FormData) => {
-    "use server";
     let html: string = "";
     formData.forEach((field, key) => {
       if (key.toString().startsWith("$")) return;
@@ -52,7 +57,9 @@ const Content = (props: ISignup) => {
     await sendEmail({
       subject: "Novo formulário de inscrição",
       html: html,
-    });
+    })
+      .then(() => setEmailSentStatus("success"))
+      .catch(() => setEmailSentStatus("error"));
   };
 
   return (
@@ -98,6 +105,24 @@ const Content = (props: ISignup) => {
             <div className="whitespace-pre-line">{rgpdText}</div>
           </div>
           <Button text={buttonLabel} type="submit" />
+          {emailSentStatus === "success" && (
+            <div
+              className={clsx(
+                "w-full text-center mt-3 text-[#70C0BB] font-semibold"
+              )}
+            >
+              Email enviado com sucesso
+            </div>
+          )}
+          {emailSentStatus === "error" && (
+            <div
+              className={clsx(
+                "w-full text-center mt-3 text-[#FF0000] font-semibold"
+              )}
+            >
+              Ocorreu um erro ao enviar o email, tente mais tarde
+            </div>
+          )}
         </form>
       </div>
     </div>

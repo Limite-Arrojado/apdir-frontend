@@ -22,7 +22,6 @@ const eventos = async ({ params }: { params: { nome: string } }) => {
 
   return (
     <>
-      <PageBanner intermediateTitle={titulo} overlay />
       <Content
         title={titulo}
         local={local}

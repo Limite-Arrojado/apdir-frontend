@@ -1,7 +1,8 @@
 "use client";
 import clsx from "clsx";
 import Image, { StaticImageData } from "next/image";
-import { useEffect, useState } from "react";
+import { ReactNode, RefObject, useEffect, useState } from "react";
+import CountUp from "react-countup";
 
 const InsolCounter = (props: {
   insol: StaticImageData;
@@ -14,30 +15,6 @@ const InsolCounter = (props: {
   const associationsInitial = 10;
   const membersFinal = qtyMembers;
   const associationsFinal = qtyAssociations;
-
-  const [members, setMembers] = useState(membersInitial);
-  const [associations, setAssociations] = useState(associationsInitial);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      if (members < membersFinal) setMembers(members + 1);
-    }, 5);
-
-    return () => clearInterval(interval);
-  }, [members, membersFinal]);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      if (associations < associationsFinal) setAssociations(associations + 1);
-    }, 100);
-
-    return () => clearInterval(interval);
-  }, [associations, associationsFinal]);
-
-  const options = {
-    style: "decimal",
-    useGrouping: true,
-  };
 
   return (
     <div
@@ -59,17 +36,46 @@ const InsolCounter = (props: {
         )}
       >
         <div className={clsx("text-center", "p-[10px]")}>
-          <div className={clsx("text-[30px]")}>
-            {members.toLocaleString("en-US", options)}+
-          </div>
+          <CountUp
+            start={membersInitial}
+            end={membersFinal}
+            delay={0}
+            duration={4}
+            suffix="+"
+          >
+            {({ countUpRef }) => (
+              <div
+                ref={countUpRef as RefObject<HTMLDivElement>}
+                className={clsx("text-[30px]")}
+              >
+                {membersInitial}
+                {/*members.toLocaleString("en-US", options)*/}+
+              </div>
+            )}
+          </CountUp>
+
           <div className={clsx("uppercase font-semibold text-[16px]")}>
             Membros
           </div>
         </div>
         <div className={clsx("text-center", "p-[10px]")}>
-          <div className={clsx("text-[30px]")}>
-            {associations.toLocaleString("en-US", options)}+
-          </div>
+          <CountUp
+            start={associationsInitial}
+            end={associationsFinal}
+            delay={0}
+            duration={4}
+            suffix="+"
+          >
+            {({ countUpRef }) => (
+              <div
+                ref={countUpRef as RefObject<HTMLDivElement>}
+                className={clsx("text-[30px]")}
+              >
+                {associationsInitial}
+                {/*members.toLocaleString("en-US", options)*/}+
+              </div>
+            )}
+          </CountUp>
           <div className={clsx("uppercase font-semibold text-[16px]")}>
             Associações
           </div>
