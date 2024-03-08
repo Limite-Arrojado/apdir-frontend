@@ -83,11 +83,12 @@ const Content = (props: IEvent) => {
               <div className={clsx("flex justify-between")}>
                 <div>
                   <h3 className={clsx("uppercase text-[36px]")}>{local}</h3>
-                  <h3 className={clsx("uppercase text-[36px]")}>
+                  <h3 className={clsx("uppercase text-[24px]")}>
                     {converterData(data)}
                   </h3>
-                  <p className={clsx("text-[18px]", "mb-3")}>{title}</p>
-                  <div className={clsx("whitespace-pre-line text-justify")}>
+                  <div
+                    className={clsx("whitespace-pre-line text-justify", "mt-8")}
+                  >
                     {parse(finalText)}
                   </div>
                 </div>
