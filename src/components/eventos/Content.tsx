@@ -20,9 +20,13 @@ interface IEvent {
 
 const parseLinks = (string: string) => {
   const linkRegex =
-    /(<a [^>]*href=['"]([^'"]+)['"][^>]*>.*?<\/a>)|((https?:\/\/[^\s<]+))/g;
+    /(<a [^>]*href=['"]([^'"]+)['"][^>]*>.*?<\/a>)|((?<!['"])(https?:\/\/[^\s<>"']+)(?!['"]))/g;
+  const imageRegex = /!\[\]\((https:\/\/[^\s]+)\)/g;
+  let parsedString = string;
 
-  const parsedString = string.replace(linkRegex, (match, p1, p2, p3) => {
+  parsedString = parsedString.replace(imageRegex, '<img src="$1" alt="" />');
+
+  parsedString = parsedString.replace(linkRegex, (match, p1, p2, p3) => {
     if (p1) {
       return p1;
     }
@@ -35,6 +39,8 @@ const parseLinks = (string: string) => {
 
     return `<a href="${p3}" target="_blank">${p3}</a>`;
   });
+
+  console.log(parsedString);
 
   return parsedString;
 };
@@ -92,7 +98,7 @@ const Content = (props: IEvent) => {
                   </div>
                 </div>
 
-                <div
+                {/*<div
                   className="cursor-pointer"
                   onClick={() => handleImageClick(0)}
                 >
@@ -105,7 +111,7 @@ const Content = (props: IEvent) => {
                       src={galleryItems[0]}
                     />
                   )}
-                </div>
+                </div>*/}
               </div>
               {!!linkGoogleFotos && (
                 <div className="relative block">
