@@ -1,4 +1,3 @@
-import PageBanner from "@/components/PageBanner";
 import Content from "@/components/eventos/Content";
 import { performRequest } from "@/utils/datocms";
 
@@ -13,12 +12,14 @@ const eventos = async ({ params }: { params: { nome: string } }) => {
     	galeria {
         url
       }
+      linkGoogleFotos
     }
 }`;
 
   const { data: res } = await performRequest({ query: queryString });
 
-  const { titulo, local, data, descricao, galeria } = res.evento ?? {};
+  const { titulo, local, data, descricao, galeria, linkGoogleFotos } =
+    res.evento ?? {};
 
   return (
     <>
@@ -28,6 +29,7 @@ const eventos = async ({ params }: { params: { nome: string } }) => {
         data={data}
         description={descricao}
         gallery={galeria}
+        linkGoogleFotos={linkGoogleFotos}
       />
     </>
   );

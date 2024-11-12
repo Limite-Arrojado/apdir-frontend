@@ -1,13 +1,11 @@
 "use client";
 import clsx from "clsx";
 import Image from "next/image";
-import Link from "next/link";
 import Gallery from "./Gallery";
 import converterData from "@/utils/dateConversion";
 import ImageViewer from "./ImageViewer";
 import parse from "html-react-parser";
-import { MouseEventHandler, ReactNode, useState } from "react";
-import { renderToString } from "react-dom/server";
+import { useState } from "react";
 
 interface IEvent {
   title: string;
@@ -17,6 +15,7 @@ interface IEvent {
   gallery: {
     url: string;
   }[];
+  linkGoogleFotos?: string;
 }
 
 const parseLinks = (string: string) => {
@@ -41,7 +40,7 @@ const parseLinks = (string: string) => {
 };
 
 const Content = (props: IEvent) => {
-  const { title, local, data, description, gallery } = props;
+  const { title, local, data, description, gallery, linkGoogleFotos } = props;
 
   const galleryItems = gallery.map((i) => i.url);
 
@@ -108,6 +107,21 @@ const Content = (props: IEvent) => {
                   )}
                 </div>
               </div>
+              {!!linkGoogleFotos && (
+                <div className="relative block">
+                  <a
+                    className={clsx(
+                      "relative inline-block mt-5 p-4",
+                      "bg-primary hover:bg-secondary text-white uppercase font-semibold",
+                      "ease duration-[.3s]"
+                    )}
+                    href={linkGoogleFotos}
+                    target="_blank"
+                  >
+                    Veja a galeria de fotografias deste evento
+                  </a>
+                </div>
+              )}
               {galleryItems.length > 1 && (
                 <div className={clsx("mt-16 w-full")}>
                   <h3 className={clsx("uppercase")}>Galeria</h3>
