@@ -11,7 +11,8 @@ export const performRequest = async ({
     },
     method: "POST",
     body: JSON.stringify({ query, variables }),
-    next: { tags: ["dato-data"] },
+    cache: 'no-store'
+    //next: { tags: ["dato-data"] },
   });
 
   const responseBody = await response.json();
