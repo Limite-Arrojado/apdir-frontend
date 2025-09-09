@@ -73,6 +73,7 @@ const Content = (props: ISignup) => {
         <div className={clsx("whitespace-pre-line", "text-[14px]")}>
           {description}
         </div>
+        {/* Formulário comentado - SendGrid não está ativo
         <form className={clsx("mt-6")} action={submitForm}>
           <NormalInput name="firstName" required label={firstName} fullWith />
           <NormalInput name="lastName" required label={lastName} fullWith />
@@ -124,6 +125,26 @@ const Content = (props: ISignup) => {
             </div>
           )}
         </form>
+        */}
+
+        <div className={clsx("mt-6", "text-center")}>
+          <a
+            href={`mailto:geral@apdir-assoc.pt?subject=Nova inscrição&body=Nome:%0D%0AData de Nascimento:%0D%0AProfissão:%0D%0ANº de Identificação:%0D%0ANº de Contribuinte:%0D%0ATelefone:%0D%0AE-mail:%0D%0AMorada:`}
+            className={clsx(
+              "inline-block",
+              "bg-[#70C0BB]",
+              "text-white",
+              "px-8",
+              "py-3",
+              "rounded",
+              "font-semibold",
+              "hover:bg-[#5da8a3]",
+              "transition-colors"
+            )}
+          >
+            Quero inscrever-me
+          </a>
+        </div>
       </div>
     </div>
   );
